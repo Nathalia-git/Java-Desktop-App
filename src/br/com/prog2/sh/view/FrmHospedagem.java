@@ -39,7 +39,7 @@ public class FrmHospedagem extends JFrame {
 	private JPanel contentPane;
 	private JTable tblConsulta;
 	private MaskFormatter mascaraData = null;
-	private JTextField txtCod;
+	private JTextField txtCodHospedagem;
 	private JTextField txtValor;
 	private JTextField txtDesconto;
 	private JButton btnInserir;
