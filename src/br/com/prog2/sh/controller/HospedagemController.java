@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.prog2.hf.model.Hospedagem;
-import br.com.prog2.hf.persistencia.ConnectionFactory;
+import br.com.prog2.sh.model.Hospedagem;
+import br.com.prog2.sh.persistencia.ConnectionFactory;
 
 public class HospedagemController {
 	public String inserir(Hospedagem hosp) {
