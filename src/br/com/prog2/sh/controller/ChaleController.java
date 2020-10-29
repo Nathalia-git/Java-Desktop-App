@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.prog2.hf.model.Chale;
-import br.com.prog2.hf.persistencia.ConnectionFactory;
+import br.com.prog2.sh.model.Chale;
+import br.com.prog2.sh.persistencia.ConnectionFactory;
 
 public class ChaleController {
 	public String inserir(Chale ch) {
-		String sql = "insert into chale(cod_chale, localizacao, capacidade, valorAltaEstacao, valorBaixaEstacao) values(?,?,?,?,?)";
+		String sql = "insert into chale(codChale, localizacao, capacidade, valorAltaEstacao, valorBaixaEstacao) values(?,?,?,?,?)";
 		Connection con = ConnectionFactory.getConnection();
 
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, ch.getCod_chale());
+			pst.setString(1, ch.getCodChale());
 			pst.setString(2, ch.getLocalizacao());
 			pst.setInt(3, ch.getCapacidade());
 			pst.setDouble(4, ch.getValorAltaEstacao());
@@ -38,7 +38,7 @@ public class ChaleController {
 	}
 
 	public String alterar(Chale ch) {
-		String sql = "update chale set localizacao=?," + "capacidade=?," + "valorAltaEstacao=?," + "valorBaixaEstacao=? where cod_chale=?";
+		String sql = "update chale set localizacao=?," + "capacidade=?," + "valorAltaEstacao=?," + "valorBaixaEstacao=? where codChale=?";
 		Connection con = ConnectionFactory.getConnection();
 
 		try {
@@ -48,7 +48,7 @@ public class ChaleController {
 			pst.setInt(2, ch.getCapacidade());
 			pst.setDouble(3, ch.getValorAltaEstacao());
 			pst.setDouble(4, ch.getValorBaixaEstacao());
-			pst.setString(5, ch.getCod_chale());
+			pst.setString(5, ch.getCodChale());
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
@@ -65,11 +65,11 @@ public class ChaleController {
 
 	public String excluir(Chale ch) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("delete from chale where cod_chale=?");
+		sql.append("delete from chale where codChale=?");
 		Connection con = ConnectionFactory.getConnection();
 		try {
 			PreparedStatement pst = con.prepareStatement(sql.toString());
-			pst.setString(1, ch.getCod_chale());
+			pst.setString(1, ch.getCodChale());
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
@@ -86,7 +86,7 @@ public class ChaleController {
 
 	public List<Chale> listarTodos() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from chale order by cod_chale");
+		sql.append("select * from chale order by codChale");
 		Connection con = ConnectionFactory.getConnection();
 		List<Chale> lista = new ArrayList<>();
 
@@ -97,7 +97,7 @@ public class ChaleController {
 			if (rs != null) {
 				while (rs.next()) {
 					Chale ch = new Chale();
-					ch.setCod_chale(rs.getString(1));
+					ch.setCodChale(rs.getString(1));
 					ch.setLocalizacao(rs.getString(2));
 					ch.setCapacidade(rs.getInt(3));
 					ch.setValorAltaEstacao(rs.getDouble(4));
@@ -116,15 +116,15 @@ public class ChaleController {
 	}
 
 	public Chale pesquisarPorCod(String cod_chale) {
-		String sql = "select * from chale where cod_chale=?";
+		String sql = "select * from chale where codChale=?";
 		Connection con = ConnectionFactory.getConnection();
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, cod_chale);
+			pst.setString(1, codChale);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				Chale ch = new Chale();
-				ch.setCod_chale(rs.getString(1));
+				ch.setCodChale(rs.getString(1));
 				ch.setLocalizacao(rs.getString(2));
 				ch.setCapacidade(rs.getInt(3));
 				ch.setValorAltaEstacao(rs.getDouble(4));
